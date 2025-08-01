@@ -3,16 +3,11 @@ package player
 import (
 	"database/sql"
 	"log"
+	"proyecto-gin-hexagonal/internal/core"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
-
-type Player struct {
-	Name         string    `json:"name" binding:"required"`
-	Age          int       `json:"age" binding:"required"`
-	CreationTime time.Time `json:"-"`
-}
 
 type PlayerHandler struct {
 	DB *sql.DB // The database connection
@@ -24,7 +19,7 @@ func NewPlayerHandler(db *sql.DB) *PlayerHandler {
 
 func (ph *PlayerHandler) CreatePlayer(ctx *gin.Context) {
 
-	var player Player
+	var player core.Player
 	if err := ctx.BindJSON(&player); err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return

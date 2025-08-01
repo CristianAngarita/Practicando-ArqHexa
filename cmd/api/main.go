@@ -38,7 +38,7 @@ func main() {
 		log.Fatalf("Error al hacer ping a la base de datos MySQL: %v", err)
 	}
 	log.Println("Conexión a MySQL establecida con éxito!")
-
+	//inyección de dependencias, Inyectar la Conexión a la Base de Datos y para Crear una Instancia del Manejador
 	playerHandler := player.NewPlayerHandler(db)
 	ginEngine := gin.Default()
 
